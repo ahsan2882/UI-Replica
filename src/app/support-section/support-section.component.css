@@ -1,0 +1,59 @@
+.image-appear {
+  animation: imageCard 2s linear forwards;
+}
+.text-appear-0,
+.text-appear-1,
+.text-appear-2 {
+  display: inline-block;
+  animation: textSlide 2s linear forwards;
+  transform: translateX(-100%) translateY(100%) scale(0);
+}
+.text-appear-0 {
+  animation-delay: 0.5s;
+}
+.text-appear-1 {
+  animation-delay: 1.2s;
+}
+.text-appear-2 {
+  animation-delay: 2.7s;
+}
+@keyframes textSlide {
+  0% {
+    transform: translateX(-100%) translateY(100%) scale(0);
+  }
+  100% {
+    transform: translateX(0) translateY(0%) scale(1);
+  }
+}
+.box-appear-0,
+.box-appear-1 {
+  animation: boxSlide 1.5s linear forwards;
+  transform: translateY(50%) scale(0);
+}
+.box-appear-0 {
+  animation-delay: 0.5s;
+}
+.box-appear-1 {
+  animation-delay: 1s;
+}
+@keyframes boxSlide {
+  0% {
+    transform: translateY(50%) scale(0);
+  }
+  100% {
+    transform: translateY(0%) scale(1);
+  }
+}
+.button-appear {
+  animation: buttonSlide 1.5s linear forwards;
+  transform: translateY(50%) scale(0);
+  animation-delay: 1.5s;
+}
+@keyframes buttonSlide {
+  0% {
+    transform: translateY(50%) scale(0);
+  }
+  100% {
+    transform: translateY(0%) scale(1);
+  }
+}
