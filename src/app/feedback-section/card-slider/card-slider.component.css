@@ -15,17 +15,21 @@
   }
 }
 .nav-zoom {
-  width: 20px;
-  height: 20px;
-  background-color: white;
   transform: scale(0);
-  animation: zoomNav 1s linear forwards;
+  animation: zoomNav 4200ms linear alternate both;
+  animation-delay: 1500ms;
 }
 @keyframes zoomNav {
   0% {
     transform: scale(0);
   }
-  100% {
+  10% {
     transform: scale(1);
+  }
+  70% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0);
   }
 }

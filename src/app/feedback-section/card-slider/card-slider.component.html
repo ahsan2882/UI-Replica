@@ -22,12 +22,16 @@
       ></app-feedback-card>
     </div>
   </div>
-  <div class="flex mt-6 items-center">
+  <div class="flex mt-6 h-8 items-center">
     <div
       *ngFor="let feedbackCard of feedbackCards; index as i; trackBy: trackByFn"
-      class="rounded-full cursor-pointer mx-2 bg-gray-400 h-4 w-4"
-      [ngClass]="{ 'nav-zoom': currentIndex === i }"
+      class="rounded-full cursor-pointer mx-2 bg-gray-700 h-4 w-4 z-10 relative"
       (click)="onSlideChange(i)"
-    ></div>
+    >
+      <div
+        class="absolute -top-[1px] -left-[1px] bg-white w-[18px] h-[18px] z-20 rounded-full nav-zoom"
+        *ngIf="currentIndex === i"
+      ></div>
+    </div>
   </div>
 </div>
