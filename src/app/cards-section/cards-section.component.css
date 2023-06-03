@@ -14,7 +14,6 @@
 .card-5 {
   transition-timing-function: linear;
   animation: scaleUp 1s forwards;
-  /* animation-delay: 0.5s; */
 }
 .card-1 {
   transition-timing-function: linear;

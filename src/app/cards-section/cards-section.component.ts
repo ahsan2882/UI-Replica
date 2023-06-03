@@ -84,7 +84,6 @@ export class CardsSectionComponent implements OnInit, OnChanges {
         sectionAnimationChanged.previousValue === 'hidden'
       ) {
         this.cards.forEach((card, index) => {
-          console.log(card.nativeElement);
           card.nativeElement.classList.remove(`card-${index}`);
         });
         this.cdr.markForCheck();
