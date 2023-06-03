@@ -94,7 +94,6 @@ export class CardsSectionComponent implements OnInit, OnChanges {
           this.cdr.markForCheck();
         }, 10);
       }
-      console.log(this.cards);
     }
   }
   trackByFn(index: number, card: CardsCategory): string | number {

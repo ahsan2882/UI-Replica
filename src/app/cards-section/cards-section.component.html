@@ -19,7 +19,8 @@
       [title]="card.title"
       [description]="card.description"
       [classes]="card.width !== 'small' ? 'rounded-[3rem]' : 'rounded-full'"
-      [buttonClasses]="' button-appear-' + card.index"
+      [buttonClasses]="'button-appear-' + card.index"
+      [triggerAnimation]="sectionAnimation"
     ></app-picture-card>
   </div>
 </section>
