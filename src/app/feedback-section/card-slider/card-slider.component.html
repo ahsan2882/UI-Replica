@@ -1,7 +1,8 @@
 <div
-  class="slider-container w-full overflow-hidden flex flex-col justify-between items-center min-h-[36rem]"
+  #sliderNav
+  class="slider-container w-full overflow-hidden flex flex-col justify-between items-center min-h-[36rem] slider-nav-appear"
 >
-  <div #carouselWrapper class="wrapper flex w-full carousel-appear">
+  <div class="wrapper flex w-full">
     <div
       class="slide w-full flex-[0_0_100%] transition transform ease-in-out"
       [ngStyle]="{ transform: 'translateX(' + translateX + '%)' }"
@@ -21,13 +22,11 @@
       ></app-feedback-card>
     </div>
   </div>
-  <div #sliderNav class="flex mt-6 items-center slider-nav-appear">
+  <div class="flex mt-6 items-center">
     <div
-      *ngFor="let i of slidesIndex"
+      *ngFor="let feedbackCard of feedbackCards; index as i; trackBy: trackByFn"
       class="rounded-full cursor-pointer mx-2 bg-gray-400 h-4 w-4"
-      [ngClass]="
-        currentIndex === i ? 'bg-white h-5 w-5' : 'bg-gray-400  h-4 w-4'
-      "
+      [ngClass]="{ 'nav-zoom': currentIndex === i }"
       (click)="onSlideChange(i)"
     ></div>
   </div>

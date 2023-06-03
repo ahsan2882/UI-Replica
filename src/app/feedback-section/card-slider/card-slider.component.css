@@ -14,16 +14,18 @@
     opacity: 1;
   }
 }
-.carousel-appear {
-  transform: translateX(50%) translateY(-200%) scale(0.2);
-  animation: moveCarousel 1.5s linear forwards;
-  animation-delay: 0.5s;
+.nav-zoom {
+  width: 20px;
+  height: 20px;
+  background-color: white;
+  transform: scale(0);
+  animation: zoomNav 1s linear forwards;
 }
-@keyframes moveCarousel {
+@keyframes zoomNav {
   0% {
-    transform: translateX(50%) translateY(-200%) scale(0.2);
+    transform: scale(0);
   }
   100% {
-    transform: translateX(0%) translateY(0%) scale(1);
+    transform: scale(1);
   }
 }
