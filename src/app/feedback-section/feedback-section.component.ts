@@ -5,6 +5,9 @@ import {
   Input,
   SimpleChanges,
   OnChanges,
+  ViewChild,
+  ElementRef,
+  ChangeDetectorRef,
 } from '@angular/core';
 import { FeedbackCard } from '../interfaces/feedback-card';
 
@@ -16,12 +19,37 @@ import { FeedbackCard } from '../interfaces/feedback-card';
 })
 export class FeedbackSectionComponent implements OnInit, OnChanges {
   @Input() sectionAnimation: 'hidden' | 'visible' = 'hidden';
+  @ViewChild('heading') heading!: ElementRef;
+  @ViewChild('icon') icon!: ElementRef;
+
   feedbackCards: FeedbackCard[] = [];
+
+  constructor(private cdr: ChangeDetectorRef) {}
+
   ngOnChanges(changes: SimpleChanges): void {
-    if (!changes['sectionAnimation'].firstChange) {
-      console.log(changes['sectionAnimation'].currentValue);
+    const sectionAnimationChange = changes['sectionAnimation'];
+    if (!sectionAnimationChange.firstChange) {
+      if (
+        sectionAnimationChange.currentValue === 'visible' &&
+        sectionAnimationChange.previousValue === 'hidden'
+      ) {
+        const spans = Array.from(
+          (this.heading.nativeElement as HTMLElement).children
+        ).filter((element) => element.tagName === 'SPAN');
+        spans.forEach((element, index) => {
+          element.classList.remove(`text-appear-${index + 1}`);
+        });
+        this.cdr.markForCheck();
+        setTimeout(() => {
+          spans.forEach((element, index) => {
+            element.classList.add(`text-appear-${index + 1}`);
+          });
+          this.cdr.markForCheck();
+        }, 10);
+      }
     }
   }
+
   ngOnInit(): void {
     this.feedbackCards = [
       {

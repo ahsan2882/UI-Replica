@@ -1,0 +1,17 @@
+.slider-nav-appear {
+  transform: translateY(200%) translateX(-50%) scale(0.2);
+}
+.slider-nav-appear {
+  animation: moveNav 1.5s ease-in-out forwards;
+  animation-delay: 0.5s;
+}
+@keyframes moveNav {
+  0% {
+    transform: translateY(200%) translateX(-50%) scale(0.2);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0%) translateY(0%) scale(1);
+    opacity: 1;
+  }
+}

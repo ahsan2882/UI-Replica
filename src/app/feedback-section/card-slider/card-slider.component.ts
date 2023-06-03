@@ -4,6 +4,10 @@ import {
   Component,
   Input,
   OnInit,
+  ViewChild,
+  ElementRef,
+  OnChanges,
+  SimpleChange,
 } from '@angular/core';
 import { FeedbackCard } from 'src/app/interfaces/feedback-card';
 
@@ -13,9 +17,13 @@ import { FeedbackCard } from 'src/app/interfaces/feedback-card';
   styleUrls: ['./card-slider.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CardSliderComponent implements OnInit {
-  constructor(private cdr: ChangeDetectorRef) {}
+export class CardSliderComponent implements OnInit, OnChanges {
   @Input() feedbackCards: FeedbackCard[] = [];
+  @Input() triggerAnimation: 'hidden' | 'visible' = 'hidden';
+
+  @ViewChild('sliderNav') sliderNav!: ElementRef<HTMLDivElement>;
+
+  constructor(private cdr: ChangeDetectorRef) {}
 
   prevIndex = 0;
   currentIndex = -1;
@@ -37,6 +45,22 @@ export class CardSliderComponent implements OnInit {
     this.translateX = this.currentIndex * -100;
     this.timer = setInterval(() => this.nextSlide(), 5000);
     this.cdr.markForCheck();
+  }
+  ngOnChanges(changes: { [propName: string]: SimpleChange }): void {
+    const triggerAnimationChange = changes['triggerAnimation'];
+    if (!triggerAnimationChange.firstChange) {
+      if (
+        triggerAnimationChange.currentValue === 'visible' &&
+        triggerAnimationChange.previousValue === 'hidden'
+      ) {
+        this.sliderNav.nativeElement.classList.remove('slider-nav-appear');
+        this.cdr.markForCheck();
+        setTimeout(() => {
+          this.sliderNav.nativeElement.classList.add('slider-nav-appear');
+          this.cdr.markForCheck();
+        }, 10);
+      }
+    }
   }
   nextSlide(): void {
     if (this.currentIndex === this.feedbackCards.length - 1) {

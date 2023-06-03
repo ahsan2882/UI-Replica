@@ -1,12 +1,24 @@
-<section class="w-full my-20 flex justify-between items-center min-h-[52rem]">
+<section
+  class="w-full my-20 flex justify-between items-center min-h-[52rem] overflow-hidden"
+>
   <div class="left-section w-7/12 px-4 py-3">
-    <app-card-slider [feedbackCards]="feedbackCards"></app-card-slider>
+    <app-card-slider
+      [feedbackCards]="feedbackCards"
+      [triggerAnimation]="sectionAnimation"
+    ></app-card-slider>
   </div>
   <div class="right-section w-5/12 px-4 py-3">
     <div class="flex">
-      <app-spin-icon></app-spin-icon>
-      <h1 class="font-blimone-ink-trap text-[11rem] leading-[0.8] -mt-4 ml-3">
-        Our experts say
+      <div #icon class="icon-wrapper">
+        <app-spin-icon></app-spin-icon>
+      </div>
+      <h1
+        #heading
+        class="font-blimone-ink-trap text-[11rem] leading-[0.8] -mt-4 ml-3"
+      >
+        <span class="text-appear-1">Our</span><br />
+        <span class="text-appear-2">experts </span><br />
+        <span class="text-appear-3">say</span>
       </h1>
     </div>
   </div>

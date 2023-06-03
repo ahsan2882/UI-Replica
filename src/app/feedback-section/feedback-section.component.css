@@ -1,0 +1,43 @@
+.text-appear-1,
+.text-appear-2,
+.text-appear-3 {
+  display: inline-block;
+}
+.text-appear-1,
+.text-appear-2,
+.text-appear-3 {
+  animation: textMove 1.5s ease-in-out forwards;
+  transform: translateX(400%) translateY(200%) scale(0.2);
+}
+.text-appear-1 {
+  animation-delay: 0.5s;
+}
+.text-appear-2 {
+  animation-delay: 1s;
+}
+.text-appear-3 {
+  animation-delay: 1.8s;
+}
+@keyframes textMove {
+  0% {
+    transform: translateX(400%) translateY(200%) scale(0.2);
+  }
+  100% {
+    transform: translateX(0%) translateY(0%) scale(1);
+  }
+}
+.icon-wrapper {
+  transform: translateX(100%) scale(0);
+}
+.icon-wrapper {
+  animation: moveIcon 1.5s ease-in-out forwards;
+  animation-delay: 0.5s;
+}
+@keyframes moveIcon {
+  0% {
+    transform: translateX(100%) scale(0);
+  }
+  100% {
+    transform: translateX(0%) scale(1);
+  }
+}
