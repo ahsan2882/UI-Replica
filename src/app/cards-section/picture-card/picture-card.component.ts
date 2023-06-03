@@ -12,4 +12,5 @@ export class PictureCardComponent {
   @Input() description: string | undefined = '';
   @Input() button: string | undefined = '';
   @Input() classes: string = '';
+  @Input() buttonClasses?: string = '';
 }

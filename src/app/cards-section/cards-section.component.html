@@ -3,6 +3,7 @@
 >
   <div
     *ngFor="let card of cardsList; trackBy: trackByFn"
+    #cardWrapper
     [ngClass]="{
       'col-span-3': card.width === 'large',
       'col-span-2': card.width === 'medium',
@@ -18,6 +19,7 @@
       [title]="card.title"
       [description]="card.description"
       [classes]="card.width !== 'small' ? 'rounded-[3rem]' : 'rounded-full'"
+      [buttonClasses]="' button-appear-' + card.index"
     ></app-picture-card>
   </div>
 </section>

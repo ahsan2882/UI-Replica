@@ -5,6 +5,10 @@ import {
   Input,
   OnChanges,
   SimpleChanges,
+  ViewChildren,
+  QueryList,
+  ElementRef,
+  ChangeDetectorRef,
 } from '@angular/core';
 import { CardsCategory } from '../interfaces/cards-category';
 
@@ -16,6 +20,8 @@ import { CardsCategory } from '../interfaces/cards-category';
 })
 export class CardsSectionComponent implements OnInit, OnChanges {
   @Input() sectionAnimation: 'hidden' | 'visible' = 'hidden';
+  @ViewChildren('cardWrapper') cards!: QueryList<ElementRef>;
+  constructor(private cdr: ChangeDetectorRef) {}
   cardsList: CardsCategory[] = [];
   ngOnInit(): void {
     // width: small -> 1x
@@ -71,8 +77,25 @@ export class CardsSectionComponent implements OnInit, OnChanges {
     ];
   }
   ngOnChanges(changes: SimpleChanges): void {
-    if (!changes['sectionAnimation'].firstChange) {
-      console.log(changes['sectionAnimation'].currentValue);
+    const sectionAnimationChanged = changes['sectionAnimation'];
+    if (!sectionAnimationChanged.firstChange) {
+      if (
+        sectionAnimationChanged.currentValue === 'visible' &&
+        sectionAnimationChanged.previousValue === 'hidden'
+      ) {
+        this.cards.forEach((card, index) => {
+          console.log(card.nativeElement);
+          card.nativeElement.classList.remove(`card-${index}`);
+        });
+        this.cdr.markForCheck();
+        setTimeout(() => {
+          this.cards.forEach((card, index) => {
+            card.nativeElement.classList.add(`card-${index}`);
+          });
+          this.cdr.markForCheck();
+        }, 10);
+      }
+      console.log(this.cards);
     }
   }
   trackByFn(index: number, card: CardsCategory): string | number {

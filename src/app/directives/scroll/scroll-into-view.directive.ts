@@ -48,7 +48,7 @@ export class ScrollIntoViewDirective implements AfterViewInit, OnDestroy {
     const rect = this.elementRef.nativeElement.getBoundingClientRect();
     const margin = parseInt(getComputedStyle(childElement).marginTop);
 
-    const scrollPosition = window.scrollY + rect.top - margin;
+    const scrollPosition = window.scrollY + 20 + rect.top - margin;
     window.scrollTo({
       top:
         this.elementRef.nativeElement.offsetTop < 100
