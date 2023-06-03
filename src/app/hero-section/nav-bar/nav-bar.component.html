@@ -1,14 +1,13 @@
 <div class="w-full flex justify-between items-center">
-  <a href="#">
-    <img
-      src="assets/images/nav-logo.png"
-      alt="navbar logo"
-      class="aspect-square"
-    />
+  <a href="#" #logo class="logo-appear">
+    <app-logo [color]="'#ff6477'"></app-logo>
   </a>
   <nav class="w-1/3">
-    <ul class="flex w-full justify-around items-center">
-      <li *ngFor="let navLink of links">
+    <ul #navBar class="flex w-full justify-around items-center">
+      <li
+        *ngFor="let navLink of links; index as i"
+        [class]="'nav-item-' + i + '-appear'"
+      >
         <a *ngIf="navLink.isLink" [href]="navLink.link">{{ navLink.title }}</a>
         <button *ngIf="navLink.isButton">
           {{ navLink.title }}
@@ -20,11 +19,13 @@
       </li>
     </ul>
   </nav>
-  <div class="w-1/6 flex justify-between items-center">
-    <button class="rounded-full py-3 px-7 bg-[#83d7e8] text-black font-bold">
+  <div #navBtn class="w-1/6 flex justify-between items-center">
+    <button
+      class="nav-btn-0 rounded-full py-3 px-7 bg-[#83d7e8] text-black font-bold"
+    >
       Contact us
     </button>
-    <button class="w-1/4 flex justify-between items-center">
+    <button class="nav-btn-1 w-1/4 flex justify-between items-center">
       <img
         src="assets/images/login-icon.png"
         alt="login"

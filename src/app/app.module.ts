@@ -16,6 +16,7 @@ import { FeedbackSectionComponent } from './feedback-section/feedback-section.co
 import { PictureCardComponent } from './cards-section/picture-card/picture-card.component';
 import { SpinIconComponent } from './components/spin-icon/spin-icon.component';
 import { ScrollIntoViewDirective } from './directives/scroll/scroll-into-view.directive';
+import { LogoComponent } from './components/logo/logo/logo.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { ScrollIntoViewDirective } from './directives/scroll/scroll-into-view.di
     PictureCardComponent,
     SpinIconComponent,
     ScrollIntoViewDirective,
+    LogoComponent,
   ],
   imports: [BrowserModule, BrowserAnimationsModule, AppRoutingModule],
   providers: [],

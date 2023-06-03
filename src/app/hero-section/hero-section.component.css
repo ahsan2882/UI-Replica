@@ -1,0 +1,47 @@
+.text-appear-0,
+.text-appear-1,
+.text-appear-2 {
+  display: inline-block;
+  animation: textMove 1.5s linear forwards;
+  transform: translateX(-200%) translateY(200%) scale(0);
+}
+.text-appear-1 {
+  animation-delay: 0.5s;
+}
+.text-appear-2 {
+  animation-delay: 1s;
+}
+@keyframes textMove {
+  0% {
+    transform: translateX(-200%) translateY(200%) scale(0);
+  }
+  100% {
+    transform: translateX(0%) translateY(0%) scale(1);
+  }
+}
+.image-appear {
+  animation: imageCard 1.5s linear forwards;
+}
+.box-0,
+.box-1,
+.btn-appear {
+  animation: boxMove 1.5s linear forwards;
+  transform: translateY(200%) scale(0);
+}
+.box-0 {
+  animation-delay: 2s;
+}
+.box-1 {
+  animation-delay: 2.5s;
+}
+.btn-appear {
+  animation-delay: 3s;
+}
+@keyframes boxMove {
+  0% {
+    transform: translateY(200%) scale(0);
+  }
+  100% {
+    transform: translateY(0%) scale(1);
+  }
+}

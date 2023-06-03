@@ -1,0 +1,60 @@
+.nav-item-0-appear,
+.nav-item-1-appear,
+.nav-item-2-appear,
+.nav-item-3-appear,
+.nav-item-4-appear {
+  animation: navItemAppear 1s linear forwards;
+  transform: scale(0);
+}
+.nav-item-1-appear {
+  animation-delay: 0.5s;
+}
+.nav-item-2-appear {
+  animation-delay: 1s;
+}
+.nav-item-3-appear {
+  animation-delay: 1.5s;
+}
+.nav-item-4-appear {
+  animation-delay: 2s;
+}
+@keyframes navItemAppear {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+.logo-appear {
+  animation: logoAppear 1s linear forwards;
+  animation-delay: 0.5s;
+  transform: scale(0);
+}
+@keyframes logoAppear {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+.nav-btn-0,
+.nav-btn-1 {
+  animation: navBtnAppear 1s linear forwards;
+  transform: scale(0);
+}
+.nav-btn-0 {
+  animation-delay: 2.5s;
+}
+.nav-btn-1 {
+  animation-delay: 3s;
+}
+@keyframes navBtnAppear {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
