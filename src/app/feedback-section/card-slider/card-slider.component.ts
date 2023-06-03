@@ -22,6 +22,7 @@ export class CardSliderComponent implements OnInit, OnChanges {
   @Input() triggerAnimation: 'hidden' | 'visible' = 'hidden';
 
   @ViewChild('sliderNav') sliderNav!: ElementRef<HTMLDivElement>;
+  @ViewChild('carouselWrapper') carouselWrapper!: ElementRef<HTMLDivElement>;
 
   constructor(private cdr: ChangeDetectorRef) {}
 
@@ -33,10 +34,13 @@ export class CardSliderComponent implements OnInit, OnChanges {
   trackByFn(index: number, item: FeedbackCard): string {
     return item.personName;
   }
-  ngOnInit(): void {
+  createTimer() {
     this.timer = setInterval(() => {
       this.nextSlide();
     }, 200);
+  }
+  ngOnInit(): void {
+    this.createTimer();
     this.slidesIndex = this.feedbackCards.map((_, index) => index);
   }
   onSlideChange(index: number): void {
@@ -54,9 +58,11 @@ export class CardSliderComponent implements OnInit, OnChanges {
         triggerAnimationChange.previousValue === 'hidden'
       ) {
         this.sliderNav.nativeElement.classList.remove('slider-nav-appear');
+        this.carouselWrapper.nativeElement.classList.remove('carousel-appear');
         this.cdr.markForCheck();
         setTimeout(() => {
           this.sliderNav.nativeElement.classList.add('slider-nav-appear');
+          this.carouselWrapper.nativeElement.classList.add('carousel-appear');
           this.cdr.markForCheck();
         }, 10);
       }

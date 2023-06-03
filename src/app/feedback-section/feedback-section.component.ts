@@ -39,11 +39,13 @@ export class FeedbackSectionComponent implements OnInit, OnChanges {
         spans.forEach((element, index) => {
           element.classList.remove(`text-appear-${index + 1}`);
         });
+        this.icon.nativeElement.classList.remove('icon-wrapper');
         this.cdr.markForCheck();
         setTimeout(() => {
           spans.forEach((element, index) => {
             element.classList.add(`text-appear-${index + 1}`);
           });
+          this.icon.nativeElement.classList.add('icon-wrapper');
           this.cdr.markForCheck();
         }, 10);
       }

@@ -1,7 +1,6 @@
 .slider-nav-appear {
   transform: translateY(200%) translateX(-50%) scale(0.2);
-}
-.slider-nav-appear {
+  opacity: 0;
   animation: moveNav 1.5s ease-in-out forwards;
   animation-delay: 0.5s;
 }
@@ -13,5 +12,18 @@
   100% {
     transform: translateX(0%) translateY(0%) scale(1);
     opacity: 1;
+  }
+}
+.carousel-appear {
+  transform: translateX(50%) translateY(-200%) scale(0.2);
+  animation: moveCarousel 1.5s linear forwards;
+  animation-delay: 0.5s;
+}
+@keyframes moveCarousel {
+  0% {
+    transform: translateX(50%) translateY(-200%) scale(0.2);
+  }
+  100% {
+    transform: translateX(0%) translateY(0%) scale(1);
   }
 }
