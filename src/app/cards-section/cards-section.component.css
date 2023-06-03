@@ -1,0 +1,38 @@
+@keyframes scaleUp {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.card-0,
+.card-2,
+.card-3,
+.card-4,
+.card-5 {
+  transition-timing-function: linear;
+  animation: scaleUp 1s forwards;
+  /* animation-delay: 0.5s; */
+}
+.card-1 {
+  transition-timing-function: linear;
+  animation: imageCard 1s forwards;
+  animation-delay: 1s;
+}
+.card-0 {
+  animation-delay: 0.5s;
+}
+.card-2 {
+  animation-delay: 1.5s;
+}
+.card-3 {
+  animation-delay: 2s;
+}
+.card-4 {
+  animation-delay: 2.5s;
+}
+.card-5 {
+  animation-delay: 3s;
+}

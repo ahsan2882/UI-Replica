@@ -1,0 +1,34 @@
+<div
+  class="slider-container w-full overflow-hidden flex flex-col justify-between items-center min-h-[36rem]"
+>
+  <div class="wrapper flex w-full">
+    <div
+      class="slide w-full flex-[0_0_100%] transition transform ease-in-out"
+      [ngStyle]="{ transform: 'translateX(' + translateX + '%)' }"
+      *ngFor="let feedbackCard of feedbackCards; trackBy: trackByFn"
+      [ngClass]="{
+        'duration-[2000ms]': translateX > feedbackCards.length * -100,
+        'duration-0': translateX === 100 || translateX === -500,
+      }"
+    >
+      <app-feedback-card
+        [designation]="feedbackCard.personDesignation"
+        [feedback]="feedbackCard.feedbackText"
+        [image]="feedbackCard.personImage"
+        [name]="feedbackCard.personName"
+        [leavingView]="feedbackCard.leavingView"
+        [enteringView]="feedbackCard.enteringView"
+      ></app-feedback-card>
+    </div>
+  </div>
+  <div class="flex mt-6 items-center">
+    <div
+      *ngFor="let i of slidesIndex"
+      class="rounded-full cursor-pointer mx-2 bg-gray-400 h-4 w-4"
+      [ngClass]="
+        currentIndex === i ? 'bg-white h-5 w-5' : 'bg-gray-400  h-4 w-4'
+      "
+      (click)="onSlideChange(i)"
+    ></div>
+  </div>
+</div>

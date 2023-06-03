@@ -1,0 +1,23 @@
+<section
+  class="w-full mt-20 py-3 grid grid-cols-6 grid-rows-5 gap-5 min-h-[52rem]"
+>
+  <div
+    *ngFor="let card of cardsList; trackBy: trackByFn"
+    [ngClass]="{
+      'col-span-3': card.width === 'large',
+      'col-span-2': card.width === 'medium',
+      'col-span-1': card.width === 'small',
+      'row-span-2': card.height === 'small',
+      'row-span-3': card.height === 'large',
+    }"
+    [class]="'w-full h-full scale-0' + ' card-' + card.index"
+  >
+    <app-picture-card
+      [backgroundImage]="card.image"
+      [button]="card.button"
+      [title]="card.title"
+      [description]="card.description"
+      [classes]="card.width !== 'small' ? 'rounded-[3rem]' : 'rounded-full'"
+    ></app-picture-card>
+  </div>
+</section>

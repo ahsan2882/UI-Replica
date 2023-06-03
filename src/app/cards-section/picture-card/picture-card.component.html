@@ -1,0 +1,35 @@
+<div class="w-full h-full flex justify-center items-center">
+  <ng-container *ngIf="backgroundImage">
+    <!-- [ngClass]="classes" -->
+    <div
+      [ngClass]="classes"
+      class="w-full h-full flex justify-start items-end p-8 bg-cover bg-no-repeat bg-center overflow-hidden transition ease-in-out transform duration-300 hover:scale-[1.02]"
+      [ngStyle]="{ 'background-image': 'url(' + backgroundImage + ')' }"
+    >
+      <button
+        *ngIf="button"
+        class="bg-[#0c0f17] text-2xl px-4 py-3 rounded-full transform hover:scale-100"
+      >
+        {{ button | titlecase }}
+      </button>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="title && description">
+    <div
+      [ngClass]="classes"
+      class="w-full h-full bg-[#0e1d31] p-8 flex flex-col justify-between"
+    >
+      <div>
+        <h1 class="font-blimone-ink-trap text-[5rem] leading-normal">
+          {{ title }}
+        </h1>
+        <p class="mt-4">{{ description }}</p>
+      </div>
+      <button class="w-full bg-[#fe6577] text-2xl text-black py-3 rounded-full">
+        {{ button }}
+      </button>
+    </div>
+  </ng-container>
+</div>
+<!-- #0c0f17 -->
+<!-- #fe6577 -->

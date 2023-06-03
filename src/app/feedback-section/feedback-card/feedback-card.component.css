@@ -1,0 +1,52 @@
+@keyframes zoomIn {
+  0% {
+    transform: scale(0.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes zoomOut {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0.2);
+  }
+}
+
+@keyframes zoomText {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+.image-appear {
+  animation: imageCard 1s forwards;
+  animation-delay: 1s;
+}
+.name-appear {
+  animation: zoomText 1s forwards;
+  animation-delay: 1.5s;
+}
+.designation-appear {
+  animation: zoomText 1s forwards;
+  animation-delay: 2s;
+}
+.feedback-appear {
+  animation: zoomText 1s forwards;
+  animation-delay: 2.5s;
+}
+.button-appear {
+  animation: zoomText 1s forwards;
+  animation-delay: 3s;
+}
+
+.scale-up {
+  animation: zoomIn 3s forwards;
+}
+.scale-down {
+  animation: zoomOut 3s forwards;
+}

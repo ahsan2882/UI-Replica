@@ -1,1 +1,28 @@
 /* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "BlimoneInkTrap";
+  src: url("assets/fonts/Blimone-BoldInktrap.ttf");
+}
+@keyframes imageCard {
+  0% {
+    transform: scaleY(0);
+    transform-origin: 0% 100%;
+  }
+  100% {
+    transform: scaleY(1);
+    transform-origin: 0% 100%;
+  }
+}
+body {
+  background-color: #0c0f17;
+  color: white;
+  padding: 2rem;
+}
+
+.font-blimone-ink-trap {
+  font-family: "BlimoneInkTrap", "Times New Roman", Times, serif;
+}
