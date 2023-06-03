@@ -52,9 +52,9 @@ export class ScrollIntoViewDirective implements AfterViewInit, OnDestroy {
     window.scrollTo({
       top:
         this.elementRef.nativeElement.offsetTop < 100
-          ? scrollPosition - 70
+          ? scrollPosition - 20
           : this.elementRef.nativeElement.localName.includes('footer')
-          ? scrollPosition + 70
+          ? scrollPosition + 20
           : scrollPosition,
       behavior: 'smooth',
     });
