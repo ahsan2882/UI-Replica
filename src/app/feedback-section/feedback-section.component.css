@@ -2,10 +2,6 @@
 .text-appear-2,
 .text-appear-3 {
   display: inline-block;
-}
-.text-appear-1,
-.text-appear-2,
-.text-appear-3 {
   animation: textMove 1.5s linear forwards;
   transform: translateX(400%) translateY(200%) scale(0.2);
 }
@@ -16,7 +12,7 @@
   animation-delay: 1s;
 }
 .text-appear-3 {
-  animation-delay: 1.8s;
+  animation-delay: 2s;
 }
 @keyframes textMove {
   0% {
