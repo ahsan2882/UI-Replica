@@ -12,12 +12,10 @@
 .card-3,
 .card-4,
 .card-5 {
-  transition-timing-function: linear;
-  animation: scaleUp 1s forwards;
+  animation: scaleUp 1s linear forwards;
 }
 .card-1 {
-  transition-timing-function: linear;
-  animation: imageCard 1s forwards;
+  animation: imageCard 1s linear forwards;
   animation-delay: 1s;
 }
 .card-0 {
