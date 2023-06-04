@@ -32,14 +32,14 @@ export class CardsSectionComponent implements OnInit, OnChanges {
     // height: large -> 3x
     this.cardsList = [
       {
-        image: 'assets/images/home.avif',
+        image: 'assets/images/home.jpg',
         button: 'Home Insurance',
         width: 'large',
         height: 'large',
         index: 0,
       },
       {
-        image: 'assets/images/beach.avif',
+        image: 'assets/images/beach.jpg',
         width: 'small',
         height: 'large',
         index: 1,
@@ -54,21 +54,21 @@ export class CardsSectionComponent implements OnInit, OnChanges {
         index: 2,
       },
       {
-        image: 'assets/images/car.avif',
+        image: 'assets/images/car.jpg',
         width: 'medium',
         height: 'small',
         button: 'Vehicle damage',
         index: 3,
       },
       {
-        image: 'assets/images/house.avif',
+        image: 'assets/images/house.jpg',
         width: 'medium',
         height: 'small',
         button: 'Mortgage insurance',
         index: 4,
       },
       {
-        image: 'assets/images/medical.avif',
+        image: 'assets/images/medical.jpg',
         width: 'medium',
         height: 'small',
         button: 'Medical expenses',
