@@ -1,5 +1,5 @@
 <div
-  class="w-full bg-[#0e1d31] p-20 rounded-2xl scale-0"
+  class="w-full bg-midnight p-20 rounded-2xl scale-0"
   [ngClass]="{
     'scale-down': leavingView && !enteringView,
     'scale-up': !leavingView && enteringView
@@ -44,7 +44,7 @@
         {{ feedback }}
       </p>
       <button
-        class="rounded-full w-full flex items-center justify-center py-4 px-12 mt-20 bg-[#85d8ea] text-black text-2xl"
+        class="rounded-full w-full flex items-center justify-center py-4 px-12 mt-20 bg-skyish-blue text-black text-2xl"
         [ngClass]="{
           'scale-0 button-appear': !leavingView && enteringView,
           'scale-100': leavingView && !enteringView
