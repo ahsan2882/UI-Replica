@@ -40,7 +40,7 @@ export class PictureCardComponent implements OnChanges {
         setTimeout(() => {
           this.buttonElement.nativeElement.classList.add(this.buttonClasses!);
           this.cdr.markForCheck();
-        }, 10);
+        }, 20);
       }
     }
   }

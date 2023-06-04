@@ -57,7 +57,7 @@ export class NavBarComponent implements OnChanges {
             element.classList.add(`nav-btn-${index}`);
           });
           this.cdr.markForCheck();
-        }, 10);
+        }, 20);
       }
     }
   }

@@ -64,7 +64,7 @@ export class HeroSectionComponent implements OnInit, OnChanges {
         this.heroBtn.nativeElement.classList.add('btn-appear');
         this.imgElement.nativeElement.classList.add('image-appear');
         this.cdr.markForCheck();
-      }, 10);
+      }, 20);
     }
   }
   ngOnInit(): void {

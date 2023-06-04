@@ -104,7 +104,7 @@ export class FormComponent implements OnChanges {
           });
           this.buttonElement.nativeElement.classList.add('btn-appear');
           this.cdr.markForCheck();
-        }, 10);
+        }, 20);
       }
     }
   }

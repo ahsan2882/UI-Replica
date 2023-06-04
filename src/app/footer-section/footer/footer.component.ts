@@ -42,7 +42,7 @@ export class FooterComponent implements OnChanges {
           this.name.nativeElement.classList.add('name-appear');
           this.link.nativeElement.classList.add('link-appear');
           this.cdr.markForCheck();
-        }, 10);
+        }, 20);
       }
     }
   }

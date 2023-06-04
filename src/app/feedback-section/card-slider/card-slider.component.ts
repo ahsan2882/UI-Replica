@@ -69,7 +69,7 @@ export class CardSliderComponent implements OnInit, OnChanges {
         setTimeout(() => {
           this.sliderNav.nativeElement.classList.add('slider-nav-appear');
           this.cdr.markForCheck();
-        }, 10);
+        }, 20);
       }
     }
   }

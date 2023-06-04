@@ -23,7 +23,7 @@ export class ScrollIntoViewDirective implements AfterViewInit, OnDestroy {
     const options = {
       root: null,
       rootMargin: '0px',
-      threshold: 0.05,
+      threshold: 0.02,
     };
     this.observer = new IntersectionObserver(this.handleIntersection, options);
     this.observer.observe(this.elementRef.nativeElement);
@@ -49,13 +49,14 @@ export class ScrollIntoViewDirective implements AfterViewInit, OnDestroy {
     const margin = parseInt(getComputedStyle(childElement).marginTop);
 
     const scrollPosition = window.scrollY + 20 + rect.top - margin;
+    const calcScroll =
+      this.elementRef.nativeElement.offsetTop < 100
+        ? 0
+        : this.elementRef.nativeElement.localName.includes('footer')
+        ? scrollPosition + 120
+        : scrollPosition;
     window.scrollTo({
-      top:
-        this.elementRef.nativeElement.offsetTop < 100
-          ? scrollPosition - 20
-          : this.elementRef.nativeElement.localName.includes('footer')
-          ? scrollPosition + 20
-          : scrollPosition,
+      top: calcScroll,
       behavior: 'smooth',
     });
   }

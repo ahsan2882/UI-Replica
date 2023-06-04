@@ -65,7 +65,7 @@ export class FooterSectionComponent implements OnChanges {
             });
           });
           this.cdr.markForCheck();
-        }, 10);
+        }, 20);
       }
     }
   }

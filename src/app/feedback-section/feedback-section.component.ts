@@ -50,7 +50,7 @@ export class FeedbackSectionComponent implements OnInit, OnChanges {
           });
           this.icon.nativeElement.classList.add('icon-wrapper');
           this.cdr.markForCheck();
-        }, 10);
+        }, 20);
       }
     }
   }

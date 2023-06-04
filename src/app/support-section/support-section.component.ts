@@ -26,7 +26,10 @@ export class SupportSectionComponent implements OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     const sectionAnimationChange = changes['sectionAnimation'];
     if (sectionAnimationChange && !sectionAnimationChange.firstChange) {
-      console.log(sectionAnimationChange.currentValue);
+      console.log(
+        sectionAnimationChange.currentValue,
+        sectionAnimationChange.previousValue
+      );
       if (
         sectionAnimationChange.currentValue === 'visible' &&
         sectionAnimationChange.previousValue === 'hidden' &&
@@ -60,7 +63,7 @@ export class SupportSectionComponent implements OnChanges {
           this.buttonElement.nativeElement.classList.add('button-appear');
           this.imageElement.nativeElement.classList.add('image-appear');
           this.cdr.markForCheck();
-        }, 10);
+        }, 20);
       }
     }
   }

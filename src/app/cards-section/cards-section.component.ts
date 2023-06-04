@@ -94,7 +94,7 @@ export class CardsSectionComponent implements OnInit, OnChanges {
             card.nativeElement.classList.add(`card-${index}`);
           });
           this.cdr.markForCheck();
-        }, 10);
+        }, 20);
       }
     }
   }
