@@ -30,37 +30,42 @@ export class HeroSectionComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     const sectionAnimationChange = changes['sectionAnimation'];
     if (sectionAnimationChange && !sectionAnimationChange.firstChange)
-      if (
-        sectionAnimationChange.currentValue === 'visible' &&
-        sectionAnimationChange.previousValue === 'hidden'
-      ) {
-        const headingSpans = Array.from(
-          this.heading.nativeElement.children
-        ).filter((element) => element.tagName === 'SPAN');
+      console.log(sectionAnimationChange.currentValue);
+    if (
+      sectionAnimationChange.currentValue === 'visible' &&
+      sectionAnimationChange.previousValue === 'hidden' &&
+      this.heading &&
+      this.boxesContainer &&
+      this.heroBtn &&
+      this.imgElement
+    ) {
+      const headingSpans = Array.from(
+        this.heading.nativeElement.children
+      ).filter((element) => element.tagName === 'SPAN');
+      headingSpans.forEach((element, index) => {
+        element.classList.remove(`text-appear-${index}`);
+      });
+      const boxes = Array.from(
+        this.boxesContainer.nativeElement.children
+      ).filter((element) => element.tagName === 'DIV');
+      boxes.forEach((element, index) => {
+        element.classList.remove(`box-${index}`);
+      });
+      this.heroBtn.nativeElement.classList.remove('btn-appear');
+      this.imgElement.nativeElement.classList.remove('image-appear');
+      this.cdr.markForCheck();
+      setTimeout(() => {
         headingSpans.forEach((element, index) => {
-          element.classList.remove(`text-appear-${index}`);
+          element.classList.add(`text-appear-${index}`);
         });
-        const boxes = Array.from(
-          this.boxesContainer.nativeElement.children
-        ).filter((element) => element.tagName === 'DIV');
         boxes.forEach((element, index) => {
-          element.classList.remove(`box-${index}`);
+          element.classList.add(`box-${index}`);
         });
-        this.heroBtn.nativeElement.classList.remove('btn-appear');
-        this.imgElement.nativeElement.classList.remove('image-appear');
+        this.heroBtn.nativeElement.classList.add('btn-appear');
+        this.imgElement.nativeElement.classList.add('image-appear');
         this.cdr.markForCheck();
-        setTimeout(() => {
-          headingSpans.forEach((element, index) => {
-            element.classList.add(`text-appear-${index}`);
-          });
-          boxes.forEach((element, index) => {
-            element.classList.add(`box-${index}`);
-          });
-          this.heroBtn.nativeElement.classList.add('btn-appear');
-          this.imgElement.nativeElement.classList.add('image-appear');
-          this.cdr.markForCheck();
-        }, 10);
-      }
+      }, 10);
+    }
   }
   ngOnInit(): void {
     this.navigationLinks = [

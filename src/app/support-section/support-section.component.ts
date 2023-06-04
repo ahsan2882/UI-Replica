@@ -26,9 +26,14 @@ export class SupportSectionComponent implements OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     const sectionAnimationChange = changes['sectionAnimation'];
     if (sectionAnimationChange && !sectionAnimationChange.firstChange) {
+      console.log(sectionAnimationChange.currentValue);
       if (
         sectionAnimationChange.currentValue === 'visible' &&
-        sectionAnimationChange.previousValue === 'hidden'
+        sectionAnimationChange.previousValue === 'hidden' &&
+        this.heading &&
+        this.textElement &&
+        this.buttonElement &&
+        this.imageElement
       ) {
         const headingSpans = Array.from(
           this.heading.nativeElement.children

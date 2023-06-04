@@ -1,9 +1,20 @@
 <footer class="mt-20 w-full">
   <ul class="flex w-full justify-between items-center">
     <li class="flex items-center">
-      <img src="assets/images/footer-logo.png" alt="footer logo" class="mr-4" />
-      <span>Darcy's insurance products</span>
+      <span #logo class="mt-2 mr-4 logo-appear">
+        <app-logo
+          [color]="'#ffffff'"
+          [size]="18"
+          [radius]="15"
+          [gap]="5"
+        ></app-logo>
+      </span>
+      <span #name class="name-appear">Darcy's insurance products</span>
     </li>
-    <li><a href="#">Privacy policy</a></li>
+    <li>
+      <a #link class="underline link-appear inline-block" href="#"
+        >Privacy policy</a
+      >
+    </li>
   </ul>
 </footer>

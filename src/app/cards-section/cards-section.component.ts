@@ -78,10 +78,12 @@ export class CardsSectionComponent implements OnInit, OnChanges {
   }
   ngOnChanges(changes: SimpleChanges): void {
     const sectionAnimationChanged = changes['sectionAnimation'];
-    if (!sectionAnimationChanged.firstChange) {
+    if (sectionAnimationChanged && !sectionAnimationChanged.firstChange) {
+      console.log(sectionAnimationChanged.currentValue);
       if (
         sectionAnimationChanged.currentValue === 'visible' &&
-        sectionAnimationChanged.previousValue === 'hidden'
+        sectionAnimationChanged.previousValue === 'hidden' &&
+        this.cards
       ) {
         this.cards.forEach((card, index) => {
           card.nativeElement.classList.remove(`card-${index}`);

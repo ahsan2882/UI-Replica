@@ -1,0 +1,26 @@
+.logo-appear,
+.name-appear,
+.link-appear {
+  animation: moveInFromBottom 1s forwards linear;
+  transform: translateY(100%) scale(0);
+  opacity: 0;
+}
+.logo-appear {
+  animation-delay: 2s;
+}
+.name-appear {
+  animation-delay: 2.5s;
+}
+.link-appear {
+  animation-delay: 3s;
+}
+@keyframes moveInFromBottom {
+  0% {
+    transform: translateY(100%) scale(0);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0%) scale(1);
+    opacity: 1;
+  }
+}

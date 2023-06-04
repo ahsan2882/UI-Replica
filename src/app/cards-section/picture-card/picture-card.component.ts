@@ -32,7 +32,8 @@ export class PictureCardComponent implements OnChanges {
     if (triggerAnimationChange && !triggerAnimationChange.firstChange) {
       if (
         triggerAnimationChange.currentValue === 'visible' &&
-        triggerAnimationChange.previousValue === 'hidden'
+        triggerAnimationChange.previousValue === 'hidden' &&
+        this.buttonElement
       ) {
         this.buttonElement.nativeElement.classList.remove(this.buttonClasses!);
         this.cdr.markForCheck();

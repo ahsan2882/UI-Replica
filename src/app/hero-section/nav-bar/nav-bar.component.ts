@@ -29,7 +29,10 @@ export class NavBarComponent implements OnChanges {
     if (triggerAnimationChange && !triggerAnimationChange.firstChange) {
       if (
         triggerAnimationChange.currentValue === 'visible' &&
-        triggerAnimationChange.previousValue === 'hidden'
+        triggerAnimationChange.previousValue === 'hidden' &&
+        this.logo &&
+        this.navBar &&
+        this.navBtn
       ) {
         this.logo.nativeElement.classList.remove('logo-appear');
         const navLinks = Array.from(this.navBar.nativeElement.children).filter(

@@ -61,7 +61,8 @@ export class CardSliderComponent implements OnInit, OnChanges {
     if (!triggerAnimationChange.firstChange) {
       if (
         triggerAnimationChange.currentValue === 'visible' &&
-        triggerAnimationChange.previousValue === 'hidden'
+        triggerAnimationChange.previousValue === 'hidden' &&
+        this.sliderNav
       ) {
         this.sliderNav.nativeElement.classList.remove('slider-nav-appear');
         this.cdr.markForCheck();

@@ -1,9 +1,21 @@
 <section class="w-full pr-20">
-  <h1 class="text-[5rem] font-blimone-ink-trap leading-none">Need Numbers?</h1>
-  <div class="w-full py-2 flex justify-between items-center mt-12">
+  <h1
+    #heading
+    class="text-[5rem] font-blimone-ink-trap leading-none heading-appear"
+  >
+    Need Numbers?
+  </h1>
+  <div
+    #btnCategories
+    class="w-full py-2 flex justify-between items-center mt-12 btn-container-appear"
+  >
     <button
-      *ngFor="let category of categories; trackBy: trackByFn"
-      class="flex justify-center items-center py-2 rounded-full px-5"
+      *ngFor="let category of categories; index as i; trackBy: trackByFn"
+      [class]="
+        'flex justify-center items-center py-2 rounded-full px-5 btn-' +
+        i +
+        '-appear'
+      "
       [ngClass]="{
         'bg-white text-black': category.selected,
         'bg-[#141c27]': !category.selected
@@ -13,21 +25,21 @@
       {{ category.name }}
     </button>
   </div>
-  <div class="mt-8 w-full flex justify-between items-center">
-    <div class="w-[48%]">
+  <div #inputBoxes class="mt-8 w-full flex justify-between items-center">
+    <div class="w-[48%] input-0-appear">
       <label for="country">Enter the country</label>
       <input
         type="text"
         name="country"
         id="country"
-        class="w-full bg-[#1e283e] text-white outline-none rounded-full px-3 py-2"
+        class="input-el w-full bg-[#1e283e] text-white outline-none rounded-full px-3 py-2"
         placeholder="Pakistan"
       />
     </div>
-    <div class="w-[48%]">
+    <div class="w-[48%] input-1-appear">
       <label for="date">Choose travel dates</label>
       <div
-        class="w-full bg-[#1e283e] text-white rounded-full px-3 py-2 flex justify-between items-center"
+        class="w-full input-el bg-[#1e283e] text-white rounded-full px-3 py-2 flex justify-between items-center"
       >
         <input
           type="text"
@@ -41,7 +53,8 @@
     </div>
   </div>
   <button
-    class="mt-8 w-full flex justify-center items-center text-2xl leading-none bg-[#ff6477] rounded-full py-4"
+    #buttonElement
+    class="btn-appear mt-8 w-full flex justify-center items-center text-2xl leading-none bg-[#ff6477] rounded-full py-4"
   >
     Calculate
   </button>

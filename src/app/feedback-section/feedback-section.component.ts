@@ -28,10 +28,13 @@ export class FeedbackSectionComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     const sectionAnimationChange = changes['sectionAnimation'];
-    if (!sectionAnimationChange.firstChange) {
+    if (sectionAnimationChange && !sectionAnimationChange.firstChange) {
+      console.log(sectionAnimationChange.currentValue);
       if (
         sectionAnimationChange.currentValue === 'visible' &&
-        sectionAnimationChange.previousValue === 'hidden'
+        sectionAnimationChange.previousValue === 'hidden' &&
+        this.heading &&
+        this.icon
       ) {
         const spans = Array.from(
           (this.heading.nativeElement as HTMLElement).children

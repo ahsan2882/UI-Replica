@@ -1,0 +1,40 @@
+.heading-0-appear,
+.heading-1-appear,
+.heading-2-appear,
+.li-0-0,
+.li-0-1,
+.li-1-0,
+.li-2-0 {
+  animation: textAppearFromBottom 0.5s forwards linear;
+  transform: translateX(0) translateY(200%) scaleY(0);
+}
+.heading-0-appear {
+  animation-delay: 1.8s;
+}
+.li-0-0 {
+  animation-delay: 2s;
+}
+.li-0-1 {
+  animation-delay: 2.2s;
+}
+.heading-1-appear {
+  animation-delay: 2.4s;
+}
+.li-1-0 {
+  animation-delay: 2.6s;
+}
+.heading-2-appear {
+  animation-delay: 2.8s;
+}
+.li-2-0 {
+  animation-delay: 3s;
+}
+
+@keyframes textAppearFromBottom {
+  0% {
+    transform: translateY(200%) scaleY(0);
+  }
+  100% {
+    transform: translateY(0%) scaleY(1);
+  }
+}
