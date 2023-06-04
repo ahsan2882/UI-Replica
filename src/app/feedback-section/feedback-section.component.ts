@@ -26,31 +26,49 @@ export class FeedbackSectionComponent implements OnInit, OnChanges {
 
   constructor(private cdr: ChangeDetectorRef) {}
 
+  triggerAnimation(
+    spans: Element[],
+    icon: ElementRef<HTMLElement>,
+    show: boolean
+  ) {
+    spans.forEach((element, index) => {
+      const classList = element.classList;
+      show
+        ? classList.add(`text-appear-${index + 1}`)
+        : classList.remove(`text-appear-${index + 1}`);
+    });
+    const iconClassList = icon.nativeElement.classList;
+    show
+      ? iconClassList.add('icon-wrapper')
+      : iconClassList.remove('icon-wrapper');
+  }
   ngOnChanges(changes: SimpleChanges): void {
     const sectionAnimationChange = changes['sectionAnimation'];
-    if (sectionAnimationChange && !sectionAnimationChange.firstChange) {
-      console.log(sectionAnimationChange.currentValue);
+    if (
+      sectionAnimationChange &&
+      !sectionAnimationChange.firstChange &&
+      this.heading &&
+      this.icon
+    ) {
+      const spans = Array.from(
+        (this.heading.nativeElement as HTMLElement).children
+      ).filter((element) => element.tagName === 'SPAN');
       if (
         sectionAnimationChange.currentValue === 'visible' &&
-        sectionAnimationChange.previousValue === 'hidden' &&
-        this.heading &&
-        this.icon
+        sectionAnimationChange.previousValue === 'hidden'
       ) {
-        const spans = Array.from(
-          (this.heading.nativeElement as HTMLElement).children
-        ).filter((element) => element.tagName === 'SPAN');
-        spans.forEach((element, index) => {
-          element.classList.remove(`text-appear-${index + 1}`);
-        });
-        this.icon.nativeElement.classList.remove('icon-wrapper');
+        this.triggerAnimation(spans, this.icon, false);
         this.cdr.markForCheck();
         setTimeout(() => {
-          spans.forEach((element, index) => {
-            element.classList.add(`text-appear-${index + 1}`);
-          });
-          this.icon.nativeElement.classList.add('icon-wrapper');
+          this.triggerAnimation(spans, this.icon, true);
           this.cdr.markForCheck();
         }, 20);
+      } else if (
+        sectionAnimationChange.previousValue === 'visible' &&
+        sectionAnimationChange.currentValue === 'hidden'
+      ) {
+        this.triggerAnimation(spans, this.icon, false);
+        this.cdr.markForCheck();
       }
     }
   }

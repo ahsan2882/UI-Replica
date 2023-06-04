@@ -23,7 +23,7 @@ export class ScrollIntoViewDirective implements AfterViewInit, OnDestroy {
     const options = {
       root: null,
       rootMargin: '0px',
-      threshold: 0.02,
+      threshold: 0.2,
     };
     this.observer = new IntersectionObserver(this.handleIntersection, options);
     this.observer.observe(this.elementRef.nativeElement);

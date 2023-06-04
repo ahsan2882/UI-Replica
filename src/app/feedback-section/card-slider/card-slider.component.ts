@@ -56,20 +56,35 @@ export class CardSliderComponent implements OnInit, OnChanges {
     this.timer = setInterval(() => this.nextSlide(), 5000);
     this.cdr.markForCheck();
   }
+  triggerAnimate(slider: ElementRef<HTMLElement>, show: boolean) {
+    const classList = slider.nativeElement.classList;
+    show
+      ? classList.add('slider-nav-appear')
+      : classList.remove('slider-nav-appear');
+  }
   ngOnChanges(changes: { [propName: string]: SimpleChange }): void {
     const triggerAnimationChange = changes['triggerAnimation'];
-    if (!triggerAnimationChange.firstChange) {
+    if (
+      triggerAnimationChange &&
+      !triggerAnimationChange.firstChange &&
+      this.sliderNav
+    ) {
       if (
         triggerAnimationChange.currentValue === 'visible' &&
-        triggerAnimationChange.previousValue === 'hidden' &&
-        this.sliderNav
+        triggerAnimationChange.previousValue === 'hidden'
       ) {
-        this.sliderNav.nativeElement.classList.remove('slider-nav-appear');
+        this.triggerAnimate(this.sliderNav, false);
         this.cdr.markForCheck();
         setTimeout(() => {
-          this.sliderNav.nativeElement.classList.add('slider-nav-appear');
+          this.triggerAnimate(this.sliderNav, true);
           this.cdr.markForCheck();
         }, 20);
+      } else if (
+        triggerAnimationChange.previousValue === 'visible' &&
+        triggerAnimationChange.currentValue === 'hidden'
+      ) {
+        this.triggerAnimate(this.sliderNav, false);
+        this.cdr.markForCheck();
       }
     }
   }

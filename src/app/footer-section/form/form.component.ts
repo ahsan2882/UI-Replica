@@ -64,47 +64,88 @@ export class FormComponent implements OnChanges {
   trackByFn(index: number, item: Category): string {
     return item.id;
   }
+  triggerAnimate(
+    heading: ElementRef<HTMLElement>,
+    btnCategories: ElementRef<HTMLElement>,
+    btns: Element[],
+    inputBoxes: Element[],
+    buttonElement: ElementRef<HTMLButtonElement>,
+    show: boolean
+  ) {
+    if (show) {
+      heading.nativeElement.classList.add('heading-appear');
+      btnCategories.nativeElement.classList.add('btn-container-appear');
+      buttonElement.nativeElement.classList.add('btn-appear');
+      btns.forEach((element, index) => {
+        element.classList.add(`btn-${index}-appear`);
+      });
+      inputBoxes.forEach((element, index) => {
+        element.classList.add(`input-${index}-appear`);
+      });
+    } else {
+      heading.nativeElement.classList.remove('heading-appear');
+      btnCategories.nativeElement.classList.remove('btn-container-appear');
+      buttonElement.nativeElement.classList.remove('btn-appear');
+      btns.forEach((element, index) => {
+        element.classList.remove(`btn-${index}-appear`);
+      });
+      inputBoxes.forEach((element, index) => {
+        element.classList.remove(`input-${index}-appear`);
+      });
+    }
+  }
   ngOnChanges(changes: SimpleChanges): void {
     const triggerAnimationChange = changes['triggerAnimation'];
-    if (triggerAnimationChange && !triggerAnimationChange.firstChange) {
+    if (
+      triggerAnimationChange &&
+      !triggerAnimationChange.firstChange &&
+      this.heading &&
+      this.btnCategories &&
+      this.inputBoxes &&
+      this.buttonElement
+    ) {
+      const btns = Array.from(this.btnCategories.nativeElement.children);
+      const inputContainers = Array.from(
+        (this.inputBoxes.nativeElement as HTMLDivElement).children
+      );
       if (
         triggerAnimationChange.currentValue === 'visible' &&
-        triggerAnimationChange.previousValue === 'hidden' &&
-        this.heading &&
-        this.btnCategories &&
-        this.inputBoxes &&
-        this.buttonElement
+        triggerAnimationChange.previousValue === 'hidden'
       ) {
-        this.heading.nativeElement.classList.remove('heading-appear');
-        this.btnCategories.nativeElement.classList.remove(
-          'btn-container-appear'
+        this.triggerAnimate(
+          this.heading,
+          this.btnCategories,
+          btns,
+          inputContainers,
+          this.buttonElement,
+          false
         );
-        const btns = Array.from(this.btnCategories.nativeElement.children);
-        btns.forEach((element, index) => {
-          element.classList.remove(`btn-${index}-appear`);
-        });
-        const inputContainers = Array.from(
-          (this.inputBoxes.nativeElement as HTMLDivElement).children
-        );
-        inputContainers.forEach((element, index) => {
-          element.classList.remove(`input-${index}-appear`);
-        });
-        this.buttonElement.nativeElement.classList.remove('btn-appear');
+
         this.cdr.markForCheck();
         setTimeout(() => {
-          this.heading.nativeElement.classList.add('heading-appear');
-          this.btnCategories.nativeElement.classList.add(
-            'btn-container-appear'
+          this.triggerAnimate(
+            this.heading,
+            this.btnCategories,
+            btns,
+            inputContainers,
+            this.buttonElement,
+            true
           );
-          btns.forEach((element, index) => {
-            element.classList.add(`btn-${index}-appear`);
-          });
-          inputContainers.forEach((element, index) => {
-            element.classList.add(`input-${index}-appear`);
-          });
-          this.buttonElement.nativeElement.classList.add('btn-appear');
           this.cdr.markForCheck();
         }, 20);
+      } else if (
+        triggerAnimationChange.previousValue === 'visible' &&
+        triggerAnimationChange.currentValue === 'hidden'
+      ) {
+        this.triggerAnimate(
+          this.heading,
+          this.btnCategories,
+          btns,
+          inputContainers,
+          this.buttonElement,
+          false
+        );
+        this.cdr.markForCheck();
       }
     }
   }

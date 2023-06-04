@@ -23,47 +23,84 @@ export class SupportSectionComponent implements OnChanges {
   @ViewChild('imageElement') imageElement!: ElementRef<HTMLImageElement>;
 
   constructor(private cdr: ChangeDetectorRef) {}
+
+  triggerAnimate(
+    headings: Element[],
+    divs: Element[],
+    btn: ElementRef<HTMLButtonElement>,
+    img: ElementRef<HTMLImageElement>,
+    show: boolean
+  ) {
+    if (show) {
+      headings.forEach((element, index) => {
+        element.classList.add(`text-appear-${index}`);
+      });
+      divs.forEach((element, index) => {
+        element.classList.add(`box-appear-${index}`);
+      });
+      btn.nativeElement.classList.add('button-appear');
+      img.nativeElement.classList.add('image-appear');
+    } else {
+      headings.forEach((element, index) => {
+        element.classList.remove(`text-appear-${index}`);
+      });
+      divs.forEach((element, index) => {
+        element.classList.remove(`box-appear-${index}`);
+      });
+      btn.nativeElement.classList.remove('button-appear');
+      img.nativeElement.classList.remove('image-appear');
+    }
+  }
   ngOnChanges(changes: SimpleChanges): void {
     const sectionAnimationChange = changes['sectionAnimation'];
-    if (sectionAnimationChange && !sectionAnimationChange.firstChange) {
-      console.log(
-        sectionAnimationChange.currentValue,
-        sectionAnimationChange.previousValue
-      );
+    if (
+      sectionAnimationChange &&
+      !sectionAnimationChange.firstChange &&
+      this.heading &&
+      this.textElement &&
+      this.buttonElement &&
+      this.imageElement
+    ) {
+      const headingSpans = Array.from(
+        this.heading.nativeElement.children
+      ).filter((element) => element.tagName === 'SPAN');
+      const textDivs = Array.from(
+        this.textElement.nativeElement.children
+      ).filter((element) => element.tagName === 'DIV');
       if (
         sectionAnimationChange.currentValue === 'visible' &&
-        sectionAnimationChange.previousValue === 'hidden' &&
-        this.heading &&
-        this.textElement &&
-        this.buttonElement &&
-        this.imageElement
+        sectionAnimationChange.previousValue === 'hidden'
       ) {
-        const headingSpans = Array.from(
-          this.heading.nativeElement.children
-        ).filter((element) => element.tagName === 'SPAN');
-        headingSpans.forEach((element, index) => {
-          element.classList.remove(`text-appear-${index}`);
-        });
-        const textDivs = Array.from(
-          this.textElement.nativeElement.children
-        ).filter((element) => element.tagName === 'DIV');
-        textDivs.forEach((element, index) => {
-          element.classList.remove(`box-appear-${index}`);
-        });
-        this.buttonElement.nativeElement.classList.remove('button-appear');
-        this.imageElement.nativeElement.classList.remove('image-appear');
+        this.triggerAnimate(
+          headingSpans,
+          textDivs,
+          this.buttonElement,
+          this.imageElement,
+          false
+        );
         this.cdr.markForCheck();
         setTimeout(() => {
-          headingSpans.forEach((element, index) => {
-            element.classList.add(`text-appear-${index}`);
-          });
-          textDivs.forEach((element, index) => {
-            element.classList.add(`box-appear-${index}`);
-          });
-          this.buttonElement.nativeElement.classList.add('button-appear');
-          this.imageElement.nativeElement.classList.add('image-appear');
+          this.triggerAnimate(
+            headingSpans,
+            textDivs,
+            this.buttonElement,
+            this.imageElement,
+            true
+          );
           this.cdr.markForCheck();
         }, 20);
+      } else if (
+        sectionAnimationChange.previousValue === 'visible' &&
+        sectionAnimationChange.currentValue === 'hidden'
+      ) {
+        this.triggerAnimate(
+          headingSpans,
+          textDivs,
+          this.buttonElement,
+          this.imageElement,
+          false
+        );
+        this.cdr.markForCheck();
       }
     }
   }

@@ -23,26 +23,48 @@ export class FooterComponent implements OnChanges {
 
   constructor(private cdr: ChangeDetectorRef) {}
 
+  triggerAnimate(
+    logo: ElementRef<HTMLElement>,
+    name: ElementRef<HTMLElement>,
+    link: ElementRef<HTMLElement>,
+    show: boolean
+  ) {
+    if (show) {
+      logo.nativeElement.classList.add('logo-appear');
+      name.nativeElement.classList.add('name-appear');
+      link.nativeElement.classList.add('link-appear');
+    } else {
+      logo.nativeElement.classList.remove('logo-appear');
+      name.nativeElement.classList.remove('name-appear');
+      link.nativeElement.classList.remove('link-appear');
+    }
+  }
+
   ngOnChanges(changes: SimpleChanges): void {
     const triggerAnimationChange = changes['triggerAnimation'];
-    if (triggerAnimationChange && !triggerAnimationChange.firstChange) {
+    if (
+      triggerAnimationChange &&
+      !triggerAnimationChange.firstChange &&
+      this.logo &&
+      this.name &&
+      this.link
+    ) {
       if (
         triggerAnimationChange.currentValue === 'visible' &&
-        triggerAnimationChange.previousValue === 'hidden' &&
-        this.logo &&
-        this.name &&
-        this.link
+        triggerAnimationChange.previousValue === 'hidden'
       ) {
-        this.logo.nativeElement.classList.remove('logo-appear');
-        this.name.nativeElement.classList.remove('name-appear');
-        this.link.nativeElement.classList.remove('link-appear');
+        this.triggerAnimate(this.logo, this.name, this.link, false);
         this.cdr.markForCheck();
         setTimeout(() => {
-          this.logo.nativeElement.classList.add('logo-appear');
-          this.name.nativeElement.classList.add('name-appear');
-          this.link.nativeElement.classList.add('link-appear');
+          this.triggerAnimate(this.logo, this.name, this.link, true);
           this.cdr.markForCheck();
         }, 20);
+      } else if (
+        triggerAnimationChange.previousValue === 'visible' &&
+        triggerAnimationChange.currentValue === 'hidden'
+      ) {
+        this.triggerAnimate(this.logo, this.name, this.link, false);
+        this.cdr.markForCheck();
       }
     }
   }

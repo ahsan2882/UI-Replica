@@ -24,40 +24,62 @@ export class NavBarComponent implements OnChanges {
   @ViewChild('navBtn') navBtn!: ElementRef<HTMLElement>;
   constructor(private cdr: ChangeDetectorRef) {}
 
+  triggerAnimate(
+    logo: ElementRef<HTMLElement>,
+    links: Element[],
+    btns: Element[],
+    show: boolean
+  ) {
+    if (show) {
+      logo.nativeElement.classList.add('logo-appear');
+      links.forEach((element, index) => {
+        element.classList.add(`nav-item-${index}-appear`);
+      });
+      btns.forEach((element, index) => {
+        element.classList.add(`nav-btn-${index}`);
+      });
+    } else {
+      logo.nativeElement.classList.add('logo-appear');
+      links.forEach((element, index) => {
+        element.classList.add(`nav-item-${index}-appear`);
+      });
+      btns.forEach((element, index) => {
+        element.classList.add(`nav-btn-${index}`);
+      });
+    }
+  }
+
   ngOnChanges(changes: SimpleChanges): void {
     const triggerAnimationChange = changes['triggerAnimation'];
-    if (triggerAnimationChange && !triggerAnimationChange.firstChange) {
+    if (
+      triggerAnimationChange &&
+      !triggerAnimationChange.firstChange &&
+      this.logo &&
+      this.navBar &&
+      this.navBtn
+    ) {
+      const navLinks = Array.from(this.navBar.nativeElement.children).filter(
+        (element) => element.tagName === 'LI'
+      );
+      const navBtns = Array.from(this.navBtn.nativeElement.children).filter(
+        (element) => element.tagName === 'BUTTON'
+      );
       if (
         triggerAnimationChange.currentValue === 'visible' &&
-        triggerAnimationChange.previousValue === 'hidden' &&
-        this.logo &&
-        this.navBar &&
-        this.navBtn
+        triggerAnimationChange.previousValue === 'hidden'
       ) {
-        this.logo.nativeElement.classList.remove('logo-appear');
-        const navLinks = Array.from(this.navBar.nativeElement.children).filter(
-          (element) => element.tagName === 'LI'
-        );
-        navLinks.forEach((element, index) => {
-          element.classList.remove(`nav-item-${index}-appear`);
-        });
-        const navBtns = Array.from(this.navBtn.nativeElement.children).filter(
-          (element) => element.tagName === 'BUTTON'
-        );
-        navBtns.forEach((element, index) => {
-          element.classList.remove(`nav-btn-${index}`);
-        });
+        this.triggerAnimate(this.logo, navLinks, navBtns, false);
         this.cdr.markForCheck();
         setTimeout(() => {
-          this.logo.nativeElement.classList.add('logo-appear');
-          navLinks.forEach((element, index) => {
-            element.classList.add(`nav-item-${index}-appear`);
-          });
-          navBtns.forEach((element, index) => {
-            element.classList.add(`nav-btn-${index}`);
-          });
+          this.triggerAnimate(this.logo, navLinks, navBtns, true);
           this.cdr.markForCheck();
         }, 20);
+      } else if (
+        triggerAnimationChange.previousValue === 'visible' &&
+        triggerAnimationChange.currentValue === 'hidden'
+      ) {
+        this.triggerAnimate(this.logo, navLinks, navBtns, false);
+        this.cdr.markForCheck();
       }
     }
   }

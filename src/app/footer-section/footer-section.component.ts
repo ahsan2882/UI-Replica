@@ -29,43 +29,54 @@ export class FooterSectionComponent implements OnChanges {
 
   constructor(private cdr: ChangeDetectorRef) {}
 
+  triggerAnimation(
+    headings: ElementRef<HTMLElement>[],
+    lists: ElementRef<HTMLElement>[],
+    show: boolean
+  ) {
+    headings.forEach((element, index) => {
+      const classList = element.nativeElement.classList;
+      show
+        ? classList.add(`heading-${index}-appear`)
+        : classList.remove(`heading-${index}-appear`);
+    });
+    lists.forEach((liElement, liIndex) => {
+      const listElements = Array.from(liElement.nativeElement.children);
+      listElements.forEach((element, liElIndex) => {
+        const classList = element.classList;
+        show
+          ? classList.add(`li-${liIndex}-${liElIndex}`)
+          : classList.remove(`li-${liIndex}-${liElIndex}`);
+      });
+    });
+  }
+
   ngOnChanges(changes: SimpleChanges): void {
     const sectionAnimationChange = changes['sectionAnimation'];
-    if (sectionAnimationChange && !sectionAnimationChange.firstChange) {
-      console.log(sectionAnimationChange.currentValue);
+    if (
+      sectionAnimationChange &&
+      !sectionAnimationChange.firstChange &&
+      this.headings &&
+      this.lists
+    ) {
+      const allHeadings = this.headings.toArray();
+      const allLists = this.lists.toArray();
       if (
         sectionAnimationChange.currentValue === 'visible' &&
-        sectionAnimationChange.previousValue === 'hidden' &&
-        this.headings &&
-        this.lists
+        sectionAnimationChange.previousValue === 'hidden'
       ) {
-        const allHeadings = this.headings.toArray();
-        const allLists = this.lists.toArray();
-        allHeadings.forEach((element, index) => {
-          console.log(element);
-          element.nativeElement.classList.remove(`heading-${index}-appear`);
-        });
-        allLists.forEach((liElement, liIndex) => {
-          const listElements = Array.from(liElement.nativeElement.children);
-          listElements.forEach((element, liElIndex) => {
-            console.log(`li-${liIndex}-${liElIndex}`);
-            element.classList.remove(`li-${liIndex}-${liElIndex}`);
-          });
-        });
+        this.triggerAnimation(allHeadings, allLists, false);
         this.cdr.markForCheck();
         setTimeout(() => {
-          allHeadings.forEach((element, index) => {
-            element.nativeElement.classList.add(`heading-${index}-appear`);
-          });
-          allLists.forEach((liElement, liIndex) => {
-            const listElements = Array.from(liElement.nativeElement.children);
-            listElements.forEach((element, liElIndex) => {
-              console.log(`li-${liIndex}-${liElIndex}`);
-              element.classList.add(`li-${liIndex}-${liElIndex}`);
-            });
-          });
+          this.triggerAnimation(allHeadings, allLists, true);
           this.cdr.markForCheck();
         }, 20);
+      } else if (
+        sectionAnimationChange.previousValue === 'visible' &&
+        sectionAnimationChange.currentValue === 'hidden'
+      ) {
+        this.triggerAnimation(allHeadings, allLists, false);
+        this.cdr.markForCheck();
       }
     }
   }

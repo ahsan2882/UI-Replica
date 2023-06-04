@@ -11,7 +11,10 @@ import {
   ChangeDetectorRef,
 } from '@angular/core';
 import { CardsCategory } from '../interfaces/cards-category';
-
+interface AnimateCards {
+  cards: QueryList<ElementRef>;
+  show: boolean;
+}
 @Component({
   selector: 'app-cards-section',
   templateUrl: './cards-section.component.html',
@@ -76,25 +79,36 @@ export class CardsSectionComponent implements OnInit, OnChanges {
       },
     ];
   }
+
+  triggerAnimation({ cards, show }: AnimateCards) {
+    cards.forEach((card, index) => {
+      const classList = card.nativeElement.classList;
+      show ? classList.add(`card-${index}`) : classList.remove(`card-${index}`);
+    });
+  }
   ngOnChanges(changes: SimpleChanges): void {
     const sectionAnimationChanged = changes['sectionAnimation'];
-    if (sectionAnimationChanged && !sectionAnimationChanged.firstChange) {
-      console.log(sectionAnimationChanged.currentValue);
+    if (
+      sectionAnimationChanged &&
+      !sectionAnimationChanged.firstChange &&
+      this.cards
+    ) {
       if (
         sectionAnimationChanged.currentValue === 'visible' &&
-        sectionAnimationChanged.previousValue === 'hidden' &&
-        this.cards
+        sectionAnimationChanged.previousValue === 'hidden'
       ) {
-        this.cards.forEach((card, index) => {
-          card.nativeElement.classList.remove(`card-${index}`);
-        });
+        this.triggerAnimation({ cards: this.cards, show: false });
         this.cdr.markForCheck();
         setTimeout(() => {
-          this.cards.forEach((card, index) => {
-            card.nativeElement.classList.add(`card-${index}`);
-          });
+          this.triggerAnimation({ cards: this.cards, show: true });
           this.cdr.markForCheck();
         }, 20);
+      } else if (
+        sectionAnimationChanged.previousValue === 'visible' &&
+        sectionAnimationChanged.currentValue === 'hidden'
+      ) {
+        this.triggerAnimation({ cards: this.cards, show: false });
+        this.cdr.markForCheck();
       }
     }
   }
